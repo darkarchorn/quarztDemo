@@ -4,17 +4,17 @@ import com.example.quartzDemo.info.ArrayInfo;
 import org.quartz.JobDataMap;
 
 public class MyThread implements Runnable{
-    public int getThreadId() {
+
+    private String threadId;
+    public String getThreadId() {
         return threadId;
     }
 
-    public void setThreadId(int threadId) {
+    public void setThreadId(String threadId) {
         this.threadId = threadId;
     }
 
-    private int threadId;
-
-    public MyThread(int threadId, ArrayInfo info) {
+    public MyThread(String threadId, ArrayInfo info) {
         this.threadId = threadId;
         this.info = info;
     }
@@ -36,6 +36,7 @@ public class MyThread implements Runnable{
     @Override
     public void run() {
         if(!this.info.isRunForever()) {
+            //System.out.println("Thread " + threadId + " is running!");
             info.insertNumber(info.getRemainingInsert());
             int remainingInsert = this.getInfo().getRemainingInsert();
             info.setRemainingInsert(remainingInsert - 1);

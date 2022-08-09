@@ -62,8 +62,8 @@ public class SimpleTriggerListener implements TriggerListener {
             }
         }*/
         List<MyThread> threads = new ArrayList<>();
-        for(int i=0; i<10 ; i++) {
-            threads.add(new MyThread(i, info));
+        for(Integer i=0; i<10 ; i++) {
+            threads.add(new MyThread(i.toString(), info));
             threads.get(i).run();
         }
         schedulerService.updateArray(arrayId, info);

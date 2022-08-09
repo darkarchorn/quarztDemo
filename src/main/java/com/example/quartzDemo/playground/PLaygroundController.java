@@ -1,5 +1,6 @@
 package com.example.quartzDemo.playground;
 
+import com.example.quartzDemo.info.ArrayInfo;
 import com.example.quartzDemo.info.TimerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,10 @@ public class PLaygroundController {
         service.runArrayJob();
     }
 
+    @GetMapping("/{arrayID}")
+    public ArrayInfo getRunningArray(@PathVariable String arrayID) {
+        return service.getRunningArray(arrayID);
+    }
 
     @GetMapping
     public List<TimerInfo> getAllRunningTimers() {
@@ -41,4 +46,5 @@ public class PLaygroundController {
     public Boolean deleteTimer(@PathVariable String timerId) {
         return service.deleteTimer(timerId);
     }
+
 }

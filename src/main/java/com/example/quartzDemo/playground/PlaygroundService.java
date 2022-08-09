@@ -33,8 +33,16 @@ public class PlaygroundService {
         return scheduler.getAllRunningTimers();
     }
 
+    public List<ArrayInfo> getAllRunningArrays() {
+        return scheduler.getAllRunningArrays();
+    }
+
     public TimerInfo getRunningTimer(String timerId) {
         return scheduler.getRunningTimer(timerId);
+    }
+
+    public ArrayInfo getRunningArray(String arrayId) {
+        return scheduler.getRunningArray(arrayId);
     }
 
     public Boolean deleteTimer(final String timerId) {

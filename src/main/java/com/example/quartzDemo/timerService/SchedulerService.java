@@ -84,6 +84,17 @@ public class SchedulerService {
         }
     }
 
+    public ArrayInfo getRunningArray(String arrayID) {
+        try {
+            final JobDetail jobDetail = scheduler.getJobDetail(new JobKey((arrayID)));
+            if(jobDetail==null) return null;
+            return (ArrayInfo)  jobDetail.getJobDataMap().get(arrayID);
+        } catch (SchedulerException e) {
+            LOG.error(e.getMessage(), e);
+            return null;
+        }
+    }
+
     public void updateTimer(final String timerID, final TimerInfo info) {
         try {
             final JobDetail jobDetail = scheduler.getJobDetail(new JobKey((timerID)));
@@ -135,4 +146,24 @@ public class SchedulerService {
     }
 
 
+    public List<ArrayInfo> getAllRunningArrays() {
+        try {
+            return scheduler.getJobKeys(GroupMatcher.anyGroup())
+                    .stream()
+                    .map(jobKey -> {
+                        try {
+                            final JobDetail jobDetail = scheduler.getJobDetail(jobKey);
+                            return (ArrayInfo) jobDetail.getJobDataMap().get(jobKey.getName());
+                        } catch (SchedulerException e) {
+                            LOG.error(e.getMessage(), e);
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        } catch (SchedulerException e) {
+            LOG.error(e.getMessage(), e);
+            return Collections.emptyList();
+        }
+    }
 }
