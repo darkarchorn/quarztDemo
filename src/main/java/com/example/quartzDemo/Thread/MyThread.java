@@ -3,9 +3,12 @@ package com.example.quartzDemo.Thread;
 import com.example.quartzDemo.info.ArrayInfo;
 import org.quartz.JobDataMap;
 
-public class MyThread implements Runnable{
+public class MyThread implements Runnable {
 
     private String threadId;
+
+    private ArrayInfo info;
+
     public String getThreadId() {
         return threadId;
     }
@@ -31,12 +34,11 @@ public class MyThread implements Runnable{
         this.info = info;
     }
 
-    private ArrayInfo info;
 
     @Override
     public void run() {
-        if(!this.info.isRunForever()) {
-            //System.out.println("Thread " + threadId + " is running!");
+        if (!this.info.isRunForever()) {
+            System.out.println("Thread " + threadId + " is running!");
             info.insertNumber(info.getRemainingInsert());
             int remainingInsert = this.getInfo().getRemainingInsert();
             info.setRemainingInsert(remainingInsert - 1);

@@ -3,14 +3,22 @@ package com.example.quartzDemo.info;
 import java.util.ArrayList;
 
 public class ArrayInfo extends Thread{
-    public ArrayList<Integer> number = new ArrayList<>();
 
+    public ArrayList<Integer> number = new ArrayList<>();
+    private int aimInsertion;
     private int inserted;
     private int remainingInsert;
-
     private boolean runForever;
     private Long repeatIntervalMs;
     private long initialOffsetMs;
+
+    public int getAimInsertion() {
+        return aimInsertion;
+    }
+
+    public void setAimInsertion(int aimInsertion) {
+        this.aimInsertion = aimInsertion;
+    }
 
     public int getRemainingInsert() {
         return remainingInsert;
@@ -53,6 +61,6 @@ public class ArrayInfo extends Thread{
     }
 
     public void insertNumber(int i) {
-        number.add(1);
+        number.add(number.size());
     }
 }
