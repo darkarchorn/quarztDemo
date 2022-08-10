@@ -27,15 +27,15 @@ public class PLaygroundController {
         service.runArrayJob();
     }
 
-    @GetMapping("/{arrayID}")
+    @GetMapping("/array/{arrayID}")
     public ArrayInfo getRunningArray(@PathVariable String arrayID) {
         return service.getRunningArray(arrayID);
     }
 
-    @GetMapping
+    /*@GetMapping
     public List<TimerInfo> getAllRunningTimers() {
         return service.getAllRunningTimers();
-    }
+    }*/
 
     @GetMapping("/{timerID}")
     public TimerInfo getRunningTimer(@PathVariable String timerID) {

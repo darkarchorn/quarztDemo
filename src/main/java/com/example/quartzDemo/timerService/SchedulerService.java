@@ -52,6 +52,26 @@ public class SchedulerService {
         }
     }
 
+    public List<ArrayInfo> getAllRunningArrays() {
+        try {
+            return scheduler.getJobKeys(GroupMatcher.anyGroup())
+                    .stream()
+                    .map(jobKey -> {
+                        try {
+                            final JobDetail jobDetail = scheduler.getJobDetail(jobKey);
+                            return (ArrayInfo) jobDetail.getJobDataMap().get(jobKey.getName());
+                        } catch (SchedulerException e) {
+                            LOG.error(e.getMessage(), e);
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+        } catch (SchedulerException e) {
+            LOG.error(e.getMessage(), e);
+            return Collections.emptyList();
+        }
+    }
     public List<TimerInfo> getAllRunningTimers() {
         try {
             return scheduler.getJobKeys(GroupMatcher.anyGroup())
@@ -142,28 +162,6 @@ public class SchedulerService {
             scheduler.shutdown();
         } catch (SchedulerException e) {
             LOG.error(e.getMessage(), e);
-        }
-    }
-
-
-    public List<ArrayInfo> getAllRunningArrays() {
-        try {
-            return scheduler.getJobKeys(GroupMatcher.anyGroup())
-                    .stream()
-                    .map(jobKey -> {
-                        try {
-                            final JobDetail jobDetail = scheduler.getJobDetail(jobKey);
-                            return (ArrayInfo) jobDetail.getJobDataMap().get(jobKey.getName());
-                        } catch (SchedulerException e) {
-                            LOG.error(e.getMessage(), e);
-                            return null;
-                        }
-                    })
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
-        } catch (SchedulerException e) {
-            LOG.error(e.getMessage(), e);
-            return Collections.emptyList();
         }
     }
 }
