@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArrayJob implements Job {
-    private static final Logger LOG = LoggerFactory.getLogger(HelloWorldJob.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ArrayJob.class);
 
     private double percentage;
 

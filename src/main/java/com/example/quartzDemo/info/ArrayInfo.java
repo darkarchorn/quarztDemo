@@ -60,7 +60,7 @@ public class ArrayInfo extends Thread{
         this.initialOffsetMs = initialOffsetMs;
     }
 
-    public void insertNumber(int i) {
+    public void insertNumber(int threadId) {
         number.add(number.size());
     }
 }

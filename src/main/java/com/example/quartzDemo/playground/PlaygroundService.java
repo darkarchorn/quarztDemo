@@ -54,7 +54,7 @@ public class PlaygroundService {
         info.setAimInsertion(1000);
         info.setInserted(1000);
         info.setRemainingInsert(info.getInserted());
-        info.setRepeatIntervalMs(1L);
+        info.setRepeatIntervalMs(100L);
         info.setInitialOffsetMs(1000);
         scheduler.schedule(ArrayJob.class, info);
     }

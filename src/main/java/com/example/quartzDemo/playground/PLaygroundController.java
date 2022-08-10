@@ -14,8 +14,6 @@ import java.util.List;
 @RequestMapping("/api/timer")
 public class PLaygroundController {
     private final PlaygroundService service;
-    int rmi = 0;
-    int aim = 0;
 
     @Autowired
     public PLaygroundController(final PlaygroundService service) {
@@ -34,6 +32,8 @@ public class PLaygroundController {
 
     @GetMapping
     public String getPercentageOfWorkDone() {
+        int rmi = 0;
+        int aim = 0;
         List<ArrayInfo> list = service.getAllRunningArrays();
         for(ArrayInfo ai : list) {
             aim += ai.getAimInsertion();
