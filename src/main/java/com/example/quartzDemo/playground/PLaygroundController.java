@@ -39,7 +39,7 @@ public class PLaygroundController {
             aim += ai.getAimInsertion();
             rmi += ai.getRemainingInsert();
         }
-        return "Work completed: " + ((aim-rmi)/100) + "%\nInsert left: " + rmi;
+        return "Work completed: " + ((aim-rmi)/100) + "%";
     }
 
 
