@@ -14,10 +14,21 @@ import org.springframework.stereotype.Service;
 public class ArrayJob implements Job {
     private static final Logger LOG = LoggerFactory.getLogger(HelloWorldJob.class);
 
+    private double percentage;
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         JobDataMap jobDataMap = jobExecutionContext.getJobDetail().getJobDataMap();
         ArrayInfo info = (ArrayInfo) jobDataMap.get(ArrayJob.class.getSimpleName());
         if(info.getRemainingInsert()%100==0) LOG.info("Inserted array percentile count is '{}%'", (1000-info.getRemainingInsert())/100);
+        this.setPercentage((1000-info.getRemainingInsert())/100);
     }
 }

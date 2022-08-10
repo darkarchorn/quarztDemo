@@ -1,7 +1,10 @@
 package com.example.quartzDemo.playground;
 
+import com.example.quartzDemo.Jobs.ArrayJob;
 import com.example.quartzDemo.info.ArrayInfo;
 import com.example.quartzDemo.info.TimerInfo;
+import org.quartz.JobDataMap;
+import org.quartz.JobExecutionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +30,16 @@ public class PLaygroundController {
         service.runArrayJob();
     }
 
-    @GetMapping("/array/{arrayID}")
-    public ArrayInfo getRunningArray(@PathVariable String arrayID) {
-        return service.getRunningArray(arrayID);
+    @GetMapping
+    public String getPercentageOfWOrkDone() {
+        int rmi = 0;
+        List<ArrayInfo> list = service.getAllRunningArrays();
+        for(ArrayInfo ai : list) {
+            rmi += ai.getRemainingInsert();
+        }
+        return "Work completed: " + ((1000-rmi)/100) + "%";
     }
+
 
     /*@GetMapping
     public List<TimerInfo> getAllRunningTimers() {

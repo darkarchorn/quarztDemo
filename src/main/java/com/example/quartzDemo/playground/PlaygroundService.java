@@ -53,7 +53,7 @@ public class PlaygroundService {
         final ArrayInfo info = new ArrayInfo();
         info.setInserted(1000);
         info.setRemainingInsert(info.getInserted());
-        info.setRepeatIntervalMs(100L);
+        info.setRepeatIntervalMs(200L);
         info.setInitialOffsetMs(1000);
         scheduler.schedule(ArrayJob.class, info);
     }
